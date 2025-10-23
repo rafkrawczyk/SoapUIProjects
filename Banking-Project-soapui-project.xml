@@ -247,4 +247,45 @@ file.eachLine {
 	ort = lineData[3]
 	plz = lineData[4]
 	log.warn "blz = $blz, bezeichnung = $bezeichnung, bic = $bic, ort = $ort, plz = $plz"
+}</script></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="9af316ff-b40d-4c80-8a65-608e4e5d44c2" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TC03_Data driven testing using Groovy" searchProperties="true"><con:settings/><con:testStep type="request" id="b7ee645c-c042-461f-8ab5-1b37b4ea498d" name="getBank"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BLZServiceSOAP11Binding</con:interface><con:operation>getBank</con:operation><con:request name="getBank" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="c2d08525-e62f-474f-8bce-1ae3fd4db9ba"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://www.thomas-bayer.com/axis2/services/BLZService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:blz="http://thomas-bayer.com/blz/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <blz:getBank>
+         <blz:blz>55010111</blz:blz>
+      </blz:getBank>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="5eb84035-087b-4e90-9cd2-8e7a5464ca24" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://thomas-bayer.com/blz/BLZServicePortType/getBankRequest"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="groovy" name="Groovy Script - E2E testing" id="725d372f-a73e-4569-94e7-9d0b77a9e5ca"><con:settings/><con:config><script>import com.eviware.soapui.support.GroovyUtils
+
+File blzFile = new File("/Users/Rafal/SoapUI Projects/blz_service_data.txt")
+String blz, bezeichnung, bic, ort, plz
+String blzInResponse, bezeichnungInResponse, bicInResponse, ortInResponse, plzInResponse
+def lineData
+def groovyUtils = new GroovyUtils(context)
+def requestXmlHolder, responseXmlHolder
+
+blzFile.eachLine {
+	line->
+	lineData = line.split(',')
+	blz = lineData[0]
+	bezeichnung = lineData[1]
+	bic = lineData[2]
+	ort = lineData[3]
+	plz = lineData[4]
+	log.info "blz = $blz, bezeichnung = $bezeichnung, bic = $bic, ort = $ort, plz = $plz"
+	requestXmlHolder = groovyUtils.getXmlHolder("getBank#Request")
+	requestXmlHolder["//blz:blz"] = blz
+	requestXmlHolder.updateProperty()
+	testRunner.testCase.getTestStepByName('getBank').run(testRunner,context)
+	responseXmlHolder = groovyUtils.getXmlHolder("getBank#Response")
+	blzInResponse = responseXmlHolder.getNodeValue("//*:blz")
+	bezeichnungInResponse = responseXmlHolder.getNodeValue("//*:bezeichnung")
+	bicInResponse = responseXmlHolder.getNodeValue("//*:bic")
+	ortInResponse = responseXmlHolder.getNodeValue("//*:ort")
+	plzInResponse = responseXmlHolder.getNodeValue("//*:plz")
+
+	assert blz == blzInResponse
+	assert bezeichnung == bezeichnungInResponse
+	assert bic == bicInResponse
+	assert ort == ortInResponse
+	assert plz == plzInResponse
 }</script></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
