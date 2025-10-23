@@ -233,4 +233,18 @@ String actualBICCode = envelope.Body.getBankResponse.details.bic
 
 log.warn "actualBICCode = $actualBICCode"
 
-assert expectedBICCode == actualBICCode, "BIC code not matching. Expected value is $expectedBICCode but actual was $actualBICCode"</script></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
+assert expectedBICCode == actualBICCode, "BIC code not matching. Expected value is $expectedBICCode but actual was $actualBICCode"</script></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="661b0acb-8d5d-4a1c-b410-4adf54233ab0" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TC02_Reading data from file" searchProperties="true"><con:settings/><con:testStep type="groovy" name="Groovy Script" id="fc29239c-a8e6-48fe-8593-86d9312c8784"><con:settings/><con:config><script>def filePath = '/Users/Rafal/SoapUI Projects/blz_service_data.txt'
+def blz, bezeichnung, bic, ort, plz
+File file = new File(filePath)
+
+file.eachLine {
+	line->
+	log.info line
+	def lineData = line.split(',')
+	blz = lineData[0]
+	bezeichnung = lineData[1]
+	bic = lineData[2]
+	ort = lineData[3]
+	plz = lineData[4]
+	log.warn "blz = $blz, bezeichnung = $bezeichnung, bic = $bic, ort = $ort, plz = $plz"
+}</script></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
