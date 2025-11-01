@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <con:soapui-project id="912935bc-86b7-4ff4-aef1-03227d5a93ad" activeEnvironment="Default" name="stockProject" resourceRoot="" soapui-version="5.9.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:testSuite id="7fe7a2d6-ee8b-4f3a-8d56-47df3132372f" name="TS01_Groovy Basics"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="483e84a9-596b-40b3-866e-5ad54d94ead2" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TC01_Groovy Stuff" searchProperties="true"><con:settings/><con:testStep type="groovy" name="Read data from excel sheet" id="8e77138d-49b2-4b9c-bf35-ed072aaf726c"><con:settings/><con:config><script>import jxl.*
-def excelFilePath = "/BLZService.xls"
+def excelFilePath = "/Users/rafal/Downloads/Data+for+BLZService.xls"
 File excelFile = new File(excelFilePath)
 Workbook workbook = Workbook.getWorkbook(excelFile)
 Sheet sheet = workbook.getSheet(0)
@@ -16,4 +16,23 @@ for(int rowIdx in 1..noOfRows){
 	log.info "blz = $blz, bez = $bez, bic = $bic, ort = $ort, plz = $plz"
 	log.warn '-------------------------------------------------------'
 }
-workbook.close()</script></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
+workbook.close()</script></con:config></con:testStep><con:testStep type="groovy" name="Methods" id="5f3521b0-39d8-4b84-bf27-bf1b6f2032cc"><con:settings/><con:config><script>def int addNumbers(int a, int b){
+	return a+b
+}
+def int subtractNumbers(int a, int b){
+	return a-b
+}
+def int divideNumbers(int a, int b){
+	return a/b
+}
+def int multiplyNumbers(int a, int b){
+	return a*b
+}
+
+int result
+
+result = addNumbers(20,30)
+log.info "addition result = $result"
+
+result = multiplyNumbers(20,20)
+log.info "multiplication result = $result"</script></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
