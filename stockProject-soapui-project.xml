@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="912935bc-86b7-4ff4-aef1-03227d5a93ad" activeEnvironment="Default" name="stockProject" resourceRoot="" soapui-version="5.9.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:testSuite id="7fe7a2d6-ee8b-4f3a-8d56-47df3132372f" name="TS01_Groovy Basics"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="483e84a9-596b-40b3-866e-5ad54d94ead2" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TC01_Groovy Stuff" searchProperties="true"><con:settings/><con:testStep type="groovy" name="Read data from excel sheet" id="8e77138d-49b2-4b9c-bf35-ed072aaf726c"><con:settings/><con:config><script>import jxl.*
+def excelFilePath = "/BLZService.xls"
+File excelFile = new File(excelFilePath)
+Workbook workbook = Workbook.getWorkbook(excelFile)
+Sheet sheet = workbook.getSheet(0)
+int noOfRows = sheet.getRows()-1
+log.info "No of Rows = $noOfRows"
+for(int rowIdx in 1..noOfRows){
+	log.warn '-------------------------------------------------------'
+	blz = sheet.getCell(0, rowIdx).getContents()
+	bez = sheet.getCell(1, rowIdx).getContents()
+	bic = sheet.getCell(2, rowIdx).getContents()
+	ort = sheet.getCell(3, rowIdx).getContents()
+	plz = sheet.getCell(4, rowIdx).getContents()
+	log.info "blz = $blz, bez = $bez, bic = $bic, ort = $ort, plz = $plz"
+	log.warn '-------------------------------------------------------'
+}
+workbook.close()</script></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
