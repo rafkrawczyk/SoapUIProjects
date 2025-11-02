@@ -35,4 +35,8 @@ result = addNumbers(20,30)
 log.info "addition result = $result"
 
 result = multiplyNumbers(20,20)
-log.info "multiplication result = $result"</script></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
+log.info "multiplication result = $result"</script></con:config></con:testStep><con:testStep type="groovy" name="SQL" id="3cca21fa-5bcc-42a5-98bd-0c5a7266fbfb"><con:settings/><con:config><script/></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:testSuite id="da70dd40-3256-43cb-865e-4d59ea7a6fb2" name="TS_Learning Groovy script"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="0fde21b0-cc04-4204-ba92-62d8b00cf677" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TC_writing methods in groovy" searchProperties="true"><con:settings/><con:testStep type="groovy" name="Groovy Script" id="ad53beaf-8953-4a37-a708-7017ac4bbfb4"><con:settings/><con:config><script>double calculateAreaOfCircle(double radius) {
+	return 3.14 * radius * radius
+}
+double areOfCircle = calculateAreaOfCircle(50)
+log.info "Area of Circle =$areOfCircle"</script></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
