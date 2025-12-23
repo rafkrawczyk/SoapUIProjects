@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-workspace name="2025.12" soapui-version="5.9.1" xmlns:con="http://eviware.com/soapui/config">
+  <con:settings/>
+  <con:project name="Calculator">/Users/rafal/Desktop/Tester/SoapUI/Calculator-soapui-project.xml</con:project>
+  <con:project name="EMS">/Users/rafal/Desktop/Tester/SoapUI/EMS-soapui-project.xml</con:project>
+  <con:project name="Employees Groovy">/Users/rafal/Desktop/Tester/SoapUI/Employees-Groovy-soapui-project.xml</con:project>
+</con:soapui-workspace>
