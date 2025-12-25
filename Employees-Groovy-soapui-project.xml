@@ -291,4 +291,10 @@ log.info context.expand('${#TestCase#age}')
 log.info testRunner.testCase.testSuite.testCases["GetEmployee"].getPropertyValue("id")
 log.info testRunner.testCase.testSuite.testCases["AddEmployee"].getPropertyValue("age")
 log.info testRunner.testCase.getPropertyValue("dept")
-log.info testRunner.testCase.testSuite.testCases["GetEmployee"].testSteps["getEmployee"].getPropertyValue("Request")</script></con:config></con:testStep><con:properties><con:property><con:name>name</con:name><con:value>Vittorio</con:value></con:property><con:property><con:name>age</con:name><con:value>89</con:value></con:property><con:property><con:name>dept</con:name><con:value>it</con:value></con:property></con:properties></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
+log.info testRunner.testCase.testSuite.testCases["GetEmployee"].testSteps["getEmployee"].getPropertyValue("Request")
+
+def project = testRunner.testcase.testSuite.project
+
+def addReq = testRunner.testcase.testSuite.testCases["AddEmployee"].testSteps["add"].getPropertyValue("Request")
+
+//def xmlAdd = new XmlHolder(addReq)</script></con:config></con:testStep><con:properties><con:property><con:name>name</con:name><con:value>Vittorio</con:value></con:property><con:property><con:name>age</con:name><con:value>89</con:value></con:property><con:property><con:name>dept</con:name><con:value>it</con:value></con:property></con:properties></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
