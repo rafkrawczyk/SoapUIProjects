@@ -283,7 +283,9 @@
          <typ:employeeName>?</typ:employeeName>
       </typ:getEmployeeDetails>
    </soap:Body>
-</soap:Envelope>]]></con:request><con:assertion type="SOAP Response" id="3e52c34b-0954-488d-87a9-0bd9c4f671a4" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:getEmployeeDetails"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties><con:property><con:name>id</con:name><con:value>128</con:value></con:property></con:properties></con:testCase><con:testCase id="961c6c5f-df79-4ba9-992b-526a8645c2cd" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Script" searchProperties="true"><con:settings/><con:testStep type="groovy" name="Groovy Script" id="b2a0914b-709b-462f-ae73-8a71240c7466"><con:settings/><con:config><script>log.info "Hello this is my first program"
+</soap:Envelope>]]></con:request><con:assertion type="SOAP Response" id="3e52c34b-0954-488d-87a9-0bd9c4f671a4" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:getEmployeeDetails"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties><con:property><con:name>id</con:name><con:value>128</con:value></con:property></con:properties></con:testCase><con:testCase id="961c6c5f-df79-4ba9-992b-526a8645c2cd" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Script" searchProperties="true"><con:settings/><con:testStep type="groovy" name="Groovy Script" id="b2a0914b-709b-462f-ae73-8a71240c7466"><con:settings/><con:config><script>import com.eviware.soapui.support.XmlHolder
+
+log.info "Hello this is my first program"
 
 log.info context.expand('${#TestCase#name}')
 log.info context.expand('${#TestCase#age}')
@@ -293,8 +295,17 @@ log.info testRunner.testCase.testSuite.testCases["AddEmployee"].getPropertyValue
 log.info testRunner.testCase.getPropertyValue("dept")
 log.info testRunner.testCase.testSuite.testCases["GetEmployee"].testSteps["getEmployee"].getPropertyValue("Request")
 
-def project = testRunner.testcase.testSuite.project
+def project = testRunner.testCase.testSuite.project
 
-def addReq = testRunner.testcase.testSuite.testCases["AddEmployee"].testSteps["add"].getPropertyValue("Request")
+def addReq = testRunner.testCase.testSuite.testCases["AddEmployee"].testSteps["add"].getPropertyValue("Request")
+def id = testRunner.testCase.testSuite.testCases["AddEmployee"].getPropertyValue("id")
+def name = testRunner.testCase.testSuite.testCases["AddEmployee"].getPropertyValue("name")
 
-//def xmlAdd = new XmlHolder(addReq)</script></con:config></con:testStep><con:properties><con:property><con:name>name</con:name><con:value>Vittorio</con:value></con:property><con:property><con:name>age</con:name><con:value>89</con:value></con:property><con:property><con:name>dept</con:name><con:value>it</con:value></con:property></con:properties></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
+def xmlAdd = new XmlHolder(addReq)
+
+xmlAdd.setNodeValue("//typ:AddEmployee/typ:name", name)
+xmlAdd.setNodeValue("//typ:AddEmployee/typ:id", id)
+
+def newAddXml = xmlAdd.getXml()
+
+testRunner.testCase.testSuite.testCases["AddEmployee"].testSteps["add"].setPropertyValue("Request", newAddXml)</script></con:config></con:testStep><con:properties><con:property><con:name>name</con:name><con:value>Vittorio</con:value></con:property><con:property><con:name>age</con:name><con:value>89</con:value></con:property><con:property><con:name>dept</con:name><con:value>it</con:value></con:property></con:properties></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
